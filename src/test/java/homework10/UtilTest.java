@@ -8,38 +8,33 @@ public class UtilTest {
 
     @Test
     public void checkPhoneNumber() {
-        boolean expected = true;
-        boolean actualF = Util.checkPhoneNumber("+38(063)-579-42-77");
-        boolean actualS = Util.checkPhoneNumber("063-579-42-77");
-        assertEquals(expected, actualF);
-        assertEquals(expected, actualS);
+        boolean f = Util.checkPhoneNumber("+38(063)-169-42-77");
+        boolean s = Util.checkPhoneNumber("+38(063)-169-42-77");
+        assertTrue(f);
+        assertTrue(s);
     }
 
     @Test
     public void checkEmail() {
-        boolean expected = true;
-        boolean actualF = Util.checkEmail("cheban.sl@mail.ru");
-        boolean actualS = Util.checkEmail("slavacheban22@gmail.com");
-        assertEquals(expected, actualF);
-        assertEquals(expected, actualS);
+        boolean f = Util.checkEmail("cheban.sl@mail.ru");
+        boolean s = Util.checkEmail("Slavacheban22@gmail.com");
+        assertTrue(f);
+        assertTrue(s);
     }
 
     @Test
     public void checkDate() {
-        boolean expected = true;
-        boolean actualF = Util.checkDate("1.12.89");
-        boolean actualS = Util.checkDate("04.04.1993");
-        assertEquals(expected, actualF);
-        assertEquals(expected, actualS);
+        boolean f = Util.checkDate("1.02.12");
+        boolean s = Util.checkDate("03.04.1993");
+        assertTrue(f);
+        assertTrue(s);
     }
 
     @Test
     public void checkIP() {
-        boolean expected = true;
-        boolean actualF = Util.checkIP("225.225.89.224");
-        boolean actualS = Util.checkIP("0.0.199.235");
-        assertEquals(expected, actualF);
-        assertEquals(expected, actualS);
+        boolean f = Util.checkIP("223.222.0.74");
+        boolean s = Util.checkIP("225.0.0.0");
+        assertTrue(f);
+        assertTrue(s);
     }
-
 }
