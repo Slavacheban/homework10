@@ -24,4 +24,5 @@ public class Main {
         list.add(map);
         UtilXML.wrightListToXML(list);
     }
+
 }
