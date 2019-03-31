@@ -9,6 +9,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
+import java.security.SecureRandom;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -16,8 +17,9 @@ import java.util.Date;
 import java.util.List;
 
 public class FruitShop {
-    private static Logger logger = Logger.getLogger(FruitShop.class.getName());
+    private final static Logger logger = Logger.getLogger(FruitShop.class.getName());
     private List<ListFruits> fruits;
+    private static final String regexDate = "dd/MM/yyyy";
 
     public FruitShop() {
         fruits = new ArrayList<>();
@@ -45,6 +47,7 @@ public class FruitShop {
         ObjectMapper mapper = new ObjectMapper();
         try {
             mapper.writeValue(writer, fruits);
+            writer.close();
         } catch (IOException e) {
             logger.error("Not write in writeValue()");
         }
@@ -71,7 +74,7 @@ public class FruitShop {
         }
         List<Fruit> sort = new ArrayList<>();
         for (Fruit fruit : fruitList) {
-            SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+            SimpleDateFormat df = new SimpleDateFormat(regexDate);
             try {
                 Date dateSp = df.parse(fruit.getDateDelivery());
                 if (dateSp.getTime() < date.getTime()) {
@@ -91,7 +94,7 @@ public class FruitShop {
         }
         List<Fruit> sort = new ArrayList<>();
         for (Fruit fruit : fruitList) {
-            SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+            SimpleDateFormat df = new SimpleDateFormat(regexDate);
             try {
                 Date dateSp = df.parse(fruit.getDateDelivery());
                 if (dateSp.getTime() > date.getTime()) {
@@ -111,7 +114,7 @@ public class FruitShop {
         }
         List<Fruit> sort = new ArrayList<>();
         for (Fruit fruit : fruitList) {
-            SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+            SimpleDateFormat df = new SimpleDateFormat(regexDate);
             try {
                 Date dateSp = df.parse(fruit.getDateDelivery());
                 if (dateSp.getTime() < date.getTime() && fruit.getName() == type) {
@@ -131,7 +134,7 @@ public class FruitShop {
         }
         List<Fruit> sort = new ArrayList<>();
         for (Fruit fruit : fruitList) {
-            SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+            SimpleDateFormat df = new SimpleDateFormat(regexDate);
             try {
                 Date dateSp = df.parse(fruit.getDateDelivery());
                 if (dateSp.getTime() > date.getTime() && fruit.getName() == type) {
@@ -145,3 +148,4 @@ public class FruitShop {
     }
 
 }
+

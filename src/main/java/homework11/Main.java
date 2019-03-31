@@ -6,4 +6,6 @@ public class Main {
         shop.load("F:\\Slava\\homework10\\src\\main\\java\\homework11\\delivery");
         shop.save("F:\\Slava\\homework10\\src\\main\\java\\homework11\\storage");
     }
+
 }
+

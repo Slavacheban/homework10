@@ -1,6 +1,7 @@
 package homework11;
 
 import org.junit.Test;
+import org.skyscreamer.jsonassert.JSONAssert;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -40,8 +41,8 @@ public class FruitShopTest {
             while ((s = reader.readLine()) != null) {
                 sb.append(s);
             }
-            String expected = "[{\"fruits\":[{\"type\":\"Banana\",\"shelfLife\":10,\"date\":\"" +
-                    "10/07/2017\",\"price\":100},{\"type\":\"Apple\",\"shelfLife\":5,\"" +
+            String expected = "[{\"fruits\":[{\"type\":\"BANANA\",\"shelfLife\":10,\"date\":\"" +
+                    "10/07/2017\",\"price\":100},{\"type\":\"APPLE\",\"shelfLife\":5,\"" +
                     "date\":\"10/07/2017\",\"price\":70}]}]";
             String actual = sb.toString();
             assertEquals(expected, actual);
@@ -100,7 +101,7 @@ public class FruitShopTest {
         try {
             int expected = 1;
             int actual = shop.getSpoiledFruits(new SimpleDateFormat("dd.MM.yyyy")
-                    .parse("1.04.3000"), Type.Banana).size();
+                    .parse("1.04.3000"), Type.BANANA).size();
             assertEquals(expected, actual);
         } catch (ParseException e) {
             e.printStackTrace();
@@ -114,7 +115,7 @@ public class FruitShopTest {
         try {
             int expected = 1;
             int actual = shop.getAvailableFruits(new SimpleDateFormat("dd.MM.yyyy")
-                    .parse("1.04.300"), Type.Banana).size();
+                    .parse("1.04.300"), Type.BANANA).size();
             assertEquals(expected, actual);
         } catch (ParseException e) {
             e.printStackTrace();
