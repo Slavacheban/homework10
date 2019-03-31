@@ -18,7 +18,7 @@ public class Fruit {
     @JsonProperty(value="shelfLife")
     private int expirationDate;
     @JsonProperty(value="date")
-    private Date dateDelivery;
+    private String dateDelivery;
     @JsonProperty(value="price")
     private int price;
 
