@@ -10,7 +10,7 @@ import java.util.List;
 @JsonAutoDetect
 public class ListFruits {
     @JsonDeserialize(as = ArrayList.class, contentAs = Fruit.class)
-    @JsonProperty(value="fruits")
+    @JsonProperty(value = "fruits")
     private List<Fruit> list;
 
     public ListFruits(List<Fruit> list) {

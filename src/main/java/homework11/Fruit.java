@@ -13,15 +13,16 @@ import java.util.Date;
 @Setter
 @AllArgsConstructor
 public class Fruit {
-    @JsonProperty(value="type")
+    @JsonProperty(value = "type")
     private Type name;
-    @JsonProperty(value="shelfLife")
+    @JsonProperty(value = "shelfLife")
     private int expirationDate;
-    @JsonProperty(value="date")
+    @JsonProperty(value = "date")
     private String dateDelivery;
-    @JsonProperty(value="price")
+    @JsonProperty(value = "price")
     private int price;
 
     public Fruit() {
     }
+
 }

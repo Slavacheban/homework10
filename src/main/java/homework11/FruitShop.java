@@ -2,6 +2,7 @@ package homework11;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.type.TypeFactory;
+import org.apache.log4j.Logger;
 
 import java.io.File;
 import java.io.FileReader;
@@ -15,31 +16,51 @@ import java.util.Date;
 import java.util.List;
 
 public class FruitShop {
+    private static Logger logger = Logger.getLogger(FruitShop.class.getName());
     private List<ListFruits> fruits;
 
     public FruitShop() {
         fruits = new ArrayList<>();
     }
 
-    public void addFruits(String pathToJsonFile) throws IOException {
+    public void addFruits(String pathToJsonFile) {
         File file = new File(pathToJsonFile);
         ObjectMapper mapper = new ObjectMapper();
-        ListFruits list = mapper.readValue(file, ListFruits.class);
+        ListFruits list = null;
+        try {
+            list = mapper.readValue(file, ListFruits.class);
+        } catch (IOException e) {
+            logger.error("Not readValue in addFruits()");
+        }
         fruits.add(list);
     }
 
-    public void save(String pathToJsonFile) throws IOException {
-        FileWriter writer = new FileWriter(pathToJsonFile);
+    public void save(String pathToJsonFile) {
+        FileWriter writer = null;
+        try {
+            writer = new FileWriter(pathToJsonFile);
+        } catch (IOException e) {
+            logger.error("Not created FileWriter in save()");
+        }
         ObjectMapper mapper = new ObjectMapper();
-        mapper.writeValue(writer, fruits);
+        try {
+            mapper.writeValue(writer, fruits);
+        } catch (IOException e) {
+            logger.error("Not write in writeValue()");
+        }
 
     }
 
-    public void load(String pathToJsonFile) throws IOException {
+    public void load(String pathToJsonFile) {
         fruits.clear();
         File file = new File(pathToJsonFile);
         ObjectMapper mapper = new ObjectMapper();
-        ListFruits list = mapper.readValue(file, ListFruits.class);
+        ListFruits list = null;
+        try {
+            list = mapper.readValue(file, ListFruits.class);
+        } catch (IOException e) {
+            logger.error("Not readValue in load()");
+        }
         fruits.add(list);
     }
 
@@ -57,7 +78,7 @@ public class FruitShop {
                     sort.add(fruit);
                 }
             } catch (ParseException e) {
-                e.printStackTrace();
+                logger.error("Date is invalid in getSpoiledFruit()");
             }
         }
         return sort;
@@ -77,7 +98,7 @@ public class FruitShop {
                     sort.add(fruit);
                 }
             } catch (ParseException e) {
-                e.printStackTrace();
+                logger.error("Date is invalid in getAvailableFruits");
             }
         }
         return sort;
@@ -97,7 +118,7 @@ public class FruitShop {
                     sort.add(fruit);
                 }
             } catch (ParseException e) {
-                e.printStackTrace();
+                logger.error("Date is invalid in getSpoiledFruit()");
             }
         }
         return sort;
@@ -117,7 +138,7 @@ public class FruitShop {
                     sort.add(fruit);
                 }
             } catch (ParseException e) {
-                e.printStackTrace();
+                logger.error("Date is invalid in getAvailableFruits");
             }
         }
         return sort;
