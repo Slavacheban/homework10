@@ -1,15 +1,12 @@
 package homework11;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.type.TypeFactory;
 import org.apache.log4j.Logger;
 
 import java.io.File;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
-import java.security.SecureRandom;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -17,9 +14,9 @@ import java.util.Date;
 import java.util.List;
 
 public class FruitShop {
-    private final static Logger logger = Logger.getLogger(FruitShop.class.getName());
+    private final static Logger LOGGER = Logger.getLogger(FruitShop.class.getName());
     private List<ListFruits> fruits;
-    private static final String regexDate = "dd/MM/yyyy";
+    private static final String REGEX_DATE = "dd/MM/yyyy";
 
     public FruitShop() {
         fruits = new ArrayList<>();
@@ -32,26 +29,18 @@ public class FruitShop {
         try {
             list = mapper.readValue(file, ListFruits.class);
         } catch (IOException e) {
-            logger.error("Not readValue in addFruits()");
+            LOGGER.error("Not readValue in addFruits()");
         }
         fruits.add(list);
     }
 
     public void save(String pathToJsonFile) {
-        FileWriter writer = null;
-        try {
-            writer = new FileWriter(pathToJsonFile);
-        } catch (IOException e) {
-            logger.error("Not created FileWriter in save()");
-        }
-        ObjectMapper mapper = new ObjectMapper();
-        try {
+        try (FileWriter writer = new FileWriter(pathToJsonFile)){
+            ObjectMapper mapper = new ObjectMapper();
             mapper.writeValue(writer, fruits);
-            writer.close();
         } catch (IOException e) {
-            logger.error("Not write in writeValue()");
+            LOGGER.error("Not created FileWriter or not write in save()");
         }
-
     }
 
     public void load(String pathToJsonFile) {
@@ -62,7 +51,7 @@ public class FruitShop {
         try {
             list = mapper.readValue(file, ListFruits.class);
         } catch (IOException e) {
-            logger.error("Not readValue in load()");
+            LOGGER.error("Not readValue in load()");
         }
         fruits.add(list);
     }
@@ -74,14 +63,14 @@ public class FruitShop {
         }
         List<Fruit> sort = new ArrayList<>();
         for (Fruit fruit : fruitList) {
-            SimpleDateFormat df = new SimpleDateFormat(regexDate);
+            SimpleDateFormat df = new SimpleDateFormat(REGEX_DATE);
             try {
                 Date dateSp = df.parse(fruit.getDateDelivery());
                 if (dateSp.getTime() < date.getTime()) {
                     sort.add(fruit);
                 }
             } catch (ParseException e) {
-                logger.error("Date is invalid in getSpoiledFruit()");
+                LOGGER.error("Date is invalid in getSpoiledFruit()");
             }
         }
         return sort;
@@ -94,14 +83,14 @@ public class FruitShop {
         }
         List<Fruit> sort = new ArrayList<>();
         for (Fruit fruit : fruitList) {
-            SimpleDateFormat df = new SimpleDateFormat(regexDate);
+            SimpleDateFormat df = new SimpleDateFormat(REGEX_DATE);
             try {
                 Date dateSp = df.parse(fruit.getDateDelivery());
                 if (dateSp.getTime() > date.getTime()) {
                     sort.add(fruit);
                 }
             } catch (ParseException e) {
-                logger.error("Date is invalid in getAvailableFruits");
+                LOGGER.error("Date is invalid in getAvailableFruits");
             }
         }
         return sort;
@@ -114,14 +103,14 @@ public class FruitShop {
         }
         List<Fruit> sort = new ArrayList<>();
         for (Fruit fruit : fruitList) {
-            SimpleDateFormat df = new SimpleDateFormat(regexDate);
+            SimpleDateFormat df = new SimpleDateFormat(REGEX_DATE);
             try {
                 Date dateSp = df.parse(fruit.getDateDelivery());
                 if (dateSp.getTime() < date.getTime() && fruit.getName() == type) {
                     sort.add(fruit);
                 }
             } catch (ParseException e) {
-                logger.error("Date is invalid in getSpoiledFruit()");
+                LOGGER.error("Date is invalid in getSpoiledFruit()");
             }
         }
         return sort;
@@ -134,18 +123,17 @@ public class FruitShop {
         }
         List<Fruit> sort = new ArrayList<>();
         for (Fruit fruit : fruitList) {
-            SimpleDateFormat df = new SimpleDateFormat(regexDate);
+            SimpleDateFormat df = new SimpleDateFormat(REGEX_DATE);
             try {
                 Date dateSp = df.parse(fruit.getDateDelivery());
                 if (dateSp.getTime() > date.getTime() && fruit.getName() == type) {
                     sort.add(fruit);
                 }
             } catch (ParseException e) {
-                logger.error("Date is invalid in getAvailableFruits");
+                LOGGER.error("Date is invalid in getAvailableFruits");
             }
         }
         return sort;
     }
 
 }
-
