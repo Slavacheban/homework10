@@ -35,7 +35,7 @@ public class FruitShop {
     }
 
     public void save(String pathToJsonFile) {
-        try (FileWriter writer = new FileWriter(pathToJsonFile)){
+        try (FileWriter writer = new FileWriter(pathToJsonFile)) {
             ObjectMapper mapper = new ObjectMapper();
             mapper.writeValue(writer, fruits);
         } catch (IOException e) {
@@ -51,7 +51,7 @@ public class FruitShop {
         try {
             list = mapper.readValue(file, ListFruits.class);
         } catch (IOException e) {
-            LOGGER.error("Not readValue in load()");
+            LOGGER.error("not readValue in load()");
         }
         fruits.add(list);
     }

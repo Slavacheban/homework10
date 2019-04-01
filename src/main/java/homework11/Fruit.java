@@ -25,4 +25,3 @@ public class Fruit {
     private int price;
 
 }
-
