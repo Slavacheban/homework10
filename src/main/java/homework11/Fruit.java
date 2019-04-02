@@ -23,5 +23,4 @@ public class Fruit {
     private String dateDelivery;
     @JsonProperty(value = "price")
     private int price;
-
 }

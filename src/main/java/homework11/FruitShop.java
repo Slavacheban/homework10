@@ -25,13 +25,12 @@ public class FruitShop {
     public void addFruits(String pathToJsonFile) {
         File file = new File(pathToJsonFile);
         ObjectMapper mapper = new ObjectMapper();
-        ListFruits list = null;
         try {
-            list = mapper.readValue(file, ListFruits.class);
+            ListFruits list = mapper.readValue(file, ListFruits.class);
+            fruits.add(list);
         } catch (IOException e) {
             LOGGER.error("Not readValue in addFruits()");
         }
-        fruits.add(list);
     }
 
     public void save(String pathToJsonFile) {
@@ -47,13 +46,12 @@ public class FruitShop {
         fruits.clear();
         File file = new File(pathToJsonFile);
         ObjectMapper mapper = new ObjectMapper();
-        ListFruits list = null;
         try {
-            list = mapper.readValue(file, ListFruits.class);
+            ListFruits list = mapper.readValue(file, ListFruits.class);
+            fruits.add(list);
         } catch (IOException e) {
             LOGGER.error("not readValue in load()");
         }
-        fruits.add(list);
     }
 
     public List<Fruit> getSpoiledFruits(Date date) {
