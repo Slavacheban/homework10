@@ -18,5 +18,4 @@ public class ListFruits {
     @JsonDeserialize(as = ArrayList.class, contentAs = Fruit.class)
     @JsonProperty(value = "fruits")
     private List<Fruit> list;
-
 }
